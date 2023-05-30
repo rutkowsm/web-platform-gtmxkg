@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <title>Bob Dylan</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const data = {
+        image: 'https://i.ytimg.com/vi/kHjzuqq3b44/maxresdefault.jpg',
+        cardTitle: 'Bob Dylan',
+        cardDescription:
+          'Bob Dylan (born Robert Allen Zimmerman, May 24, 1941) is an American singer/songwriter, author, and artist who has been an influential figure in popular music and culture for more than five decades.',
+        button: {
+          url: 'https://en.wikipedia.org/wiki/Bob_Dylan',
+          label: 'Go to wikipedia',
+        },
+      };
+
+      function OneData(props) {
+        return React.createElement(
+          'div',
+          { className: 'card m-5' },
+          React.createElement('img', {
+            className: 'card-img-top',
+            src: props.data.image,
+            alt: 'Card image cap',
+          }),
+          React.createElement(
+            'div',
+            { className: 'card-body' },
+            React.createElement(
+              'h5',
+              { className: 'card-title' },
+              props.data.cardTitle
+            ),
+            React.createElement(
+              'p',
+              { className: 'card-text' },
+              props.data.cardDescription
+            ),
+            React.createElement(
+              'a',
+              { href: props.data.button.url, className: 'btn btn-primary' },
+              props.data.button.label
+            )
+          )
+        );
+      }
+
+      function AllData(props) {
+        return React.createElement(
+          'div',
+          null,
+          props.dataList.map((data, index) =>
+            React.createElement(OneData, { key: index, data: data })
+          )
+        );
+      }
+
+      const dataList = [data]; 
+
+      ReactDOM.render(
+        React.createElement(AllData, { dataList: dataList }),
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
